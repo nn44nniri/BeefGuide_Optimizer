@@ -1,0 +1,13 @@
+services:
+  beefguide-service:
+    image: beefguide-optimizer
+    container_name: beefguide-service
+    # Pin the service to host logical CPU core 6 only.
+    cpuset: "6"
+    # Limit the container to 4 GiB of RAM.
+    mem_limit: 4g
+    memswap_limit: 4g
+    volumes:
+      - /tmp/beefguide:/tmp/beefguide
+    command: ["python", "-m", "BeefMPC_Guide.service", "--socket-path", "/tmp/beefguide/guide-interface.sock"]
+    restart: unless-stopped

@@ -1,0 +1,6 @@
+grpcio>=1.78.0
+protobuf>=7.34.0
+pandas>=2.2.0
+numpy>=1.26.0
+matplotlib>=3.8.0
+tqdm>=4.66.0

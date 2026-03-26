@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package beefguide;
+
+message ClimateDay {
+  int32 wts = 1;
+  int32 yr = 2;
+  int32 doy = 3;
+  double rad = 4;
+  double mint = 5;
+  double maxt = 6;
+  double vpr = 7;
+  double wind = 8;
+  double rain = 9;
+  double aha = 10;
+  double okta = 11;
+}
+
+message GuideRequest {
+  string request_id = 1;
+  int32 scenario_id = 2;
+  repeated ClimateDay climate_history = 3;
+}
+
+message TargetBand {
+  double lower = 1;
+  double upper = 2;
+}
+
+message ExpectedEffect {
+  double beef_gain_kg_next_24h = 1;
+  double feed_intake_kg_dm_next_24h = 2;
+  double feed_efficiency_change_g_beef_per_kg_dm = 3;
+}
+
+message GuideResponse {
+  string request_id = 1;
+  int32 scenario_id = 2;
+  TargetBand air_temperature_c = 3;
+  TargetBand relative_humidity_pct = 4;
+  TargetBand air_velocity_mps = 5;
+  string priority = 6;
+  ExpectedEffect expected_effect = 7;
+  string dominant_limiting_factor = 8;
+  string risk_level = 9;
+  double economic_score = 10;
+  string engine = 11;
+  string notes = 12;
+}
+
+service BeefGuideService {
+  rpc GetDailyGuide(GuideRequest) returns (GuideResponse);
+}

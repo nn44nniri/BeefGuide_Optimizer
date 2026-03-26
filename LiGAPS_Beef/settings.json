@@ -1,0 +1,668 @@
+{
+  // Breed genotype libraries used by the LiGAPS-Beef daily simulator.
+  // Each breed entry must provide both male and female parameter sets.
+  "breeds": [
+    {
+      // Numeric breed identifier referenced by scenarios.
+      "id": 1,
+      // Human-readable breed name.
+      "name": "Charolais",
+      // Breed-specific parameter sets used inside the mechanistic equations.
+      "sex_libraries": {
+        // Male parameter set. The code maps these names back to the original LIBRARY order internally.
+        "male": {
+          "reflectance_coat": 0.6, // Table S2 / REFLC: coat reflectance used in the thermoregulation sub-model (-).
+          "coat_length_m": 0.012, // Table S2 / LC: coat length used by thermoregulation (m).
+          "body_area_factor": 1.0, // Table S2 / AREAFACTOR: body-area-to-weight factor used to estimate body surface area (-).
+          "core_skin_conductance_max_W_m2_K": 64.1, // Table S2 / CBSMAX: maximum conduction from body core to skin (W m-2 K-1).
+          "start_body_weight_kg": 48.1, // Initial total body weight at day 0 in the code; matches the breed-specific starting live weight (kg).
+          "gompertz_max_adult_weight_kg": 1616.7, // Table S2 / MAXW: maximum adult weight used inside the Gompertz growth curve (kg TBW).
+          "birth_weight_kg": 48.1, // Table S2 / BIRTHW: birth weight in the Gompertz curve and calf initialization (kg).
+          "gompertz_integration_constant": 1.6, // Table S2 / CPAR: Gompertz constant of integration (-).
+          "gompertz_rate_constant": 1.1, // Table S2 / DPAR: Gompertz rate constant (-).
+          "gompertz_reduction_kg_tbw": 316.7, // Table S2 / EPAR: Gompertz reduction parameter (kg TBW).
+          "lactation_curve_parameter_a": 0.0, // Table S2 / MILKPARA: Wood lactation curve parameter A; for males this stays 0 because there is no milk production.
+          "lactation_curve_parameter_b": 0.068, // Table S2 / MILKPARB: Wood lactation curve parameter B.
+          "maximum_adult_weight_reference_kg": 1300, // Table S2 / MAXW1: reference maximum adult weight used elsewhere in the growth and carcass equations (kg).
+          "sex_flag_0_male_1_female": 0, // Sex flag expected by the simulator: 0 for male, 1 for female.
+          "milk_available_for_calf_parameter_a": 8, // Code section 1.3.1: lactation-availability parameter A used for milk available to the calf.
+          "milk_available_for_calf_parameter_b": 0.068, // Code section 1.3.1: lactation-availability parameter B used for milk available to the calf.
+          "minimum_fraction_mature_tbw_for_gestation": 0.6, // Code section 1.3.1: minimum fraction of mature total body weight required before gestation is allowed (-).
+          "maintenance_correction_factor": 1.0, // Table S2 / maintenance correction factor applied to net energy for maintenance (-).
+          "minimum_fat_tissue_fraction_for_gestation": 0.32, // Code section 1.3.1: minimum fat tissue proportion in the carcass required before gestation is allowed (-).
+          "lipid_bone_parameter": 11.1, // Table S2 / lipid bone parameter used in the bone lipid equation.
+          "maximum_carcass_fraction": 0.64, // Table S2: maximum carcass fraction of total body weight (-).
+          "maximum_muscle_bone_ratio": 4.4, // Table S2: maximum muscle-to-bone ratio used in carcass tissue partitioning (-).
+          "minimum_core_skin_conductance_factor": 1.0, // Table S2 / RBCSf: minimum conduction factor from body core to skin (-).
+          "latent_heat_release_parameter_1": 3.08, // Table S2: latent heat release parameter 1 used in sweating / skin latent heat release.
+          "latent_heat_release_parameter_2": 1.73, // Table S2: latent heat release parameter 2 used in sweating / skin latent heat release.
+          "latent_heat_release_reference_temperature_c": 35.3, // Table S2: latent heat release reference temperature (°C).
+          "lactation_curve_parameter_c": 0.00338 // Table S2 / MILKPARC: Wood lactation curve parameter C; legacy 26-value breed blocks may omit this and use the default fill value.
+        },
+        // Female parameter set. The code maps these names back to the original LIBRARY order internally.
+        "female": {
+          "reflectance_coat": 0.6, // Table S2 / REFLC: coat reflectance used in the thermoregulation sub-model (-).
+          "coat_length_m": 0.012, // Table S2 / LC: coat length used by thermoregulation (m).
+          "body_area_factor": 1.0, // Table S2 / AREAFACTOR: body-area-to-weight factor used to estimate body surface area (-).
+          "core_skin_conductance_max_W_m2_K": 64.1, // Table S2 / CBSMAX: maximum conduction from body core to skin (W m-2 K-1).
+          "start_body_weight_kg": 45.9, // Initial total body weight at day 0 in the code; matches the breed-specific starting live weight (kg).
+          "gompertz_max_adult_weight_kg": 1178.7, // Table S2 / MAXW: maximum adult weight used inside the Gompertz growth curve (kg TBW).
+          "birth_weight_kg": 45.9, // Table S2 / BIRTHW: birth weight in the Gompertz curve and calf initialization (kg).
+          "gompertz_integration_constant": 1.6, // Table S2 / CPAR: Gompertz constant of integration (-).
+          "gompertz_rate_constant": 1.1, // Table S2 / DPAR: Gompertz rate constant (-).
+          "gompertz_reduction_kg_tbw": 228.7, // Table S2 / EPAR: Gompertz reduction parameter (kg TBW).
+          "lactation_curve_parameter_a": 8, // Table S2 / MILKPARA: Wood lactation curve parameter A; for males this stays 0 because there is no milk production.
+          "lactation_curve_parameter_b": 0.068, // Table S2 / MILKPARB: Wood lactation curve parameter B.
+          "maximum_adult_weight_reference_kg": 950, // Table S2 / MAXW1: reference maximum adult weight used elsewhere in the growth and carcass equations (kg).
+          "sex_flag_0_male_1_female": 1, // Sex flag expected by the simulator: 0 for male, 1 for female.
+          "milk_available_for_calf_parameter_a": 8, // Code section 1.3.1: lactation-availability parameter A used for milk available to the calf.
+          "milk_available_for_calf_parameter_b": 0.068, // Code section 1.3.1: lactation-availability parameter B used for milk available to the calf.
+          "minimum_fraction_mature_tbw_for_gestation": 0.6, // Code section 1.3.1: minimum fraction of mature total body weight required before gestation is allowed (-).
+          "maintenance_correction_factor": 1.0, // Table S2 / maintenance correction factor applied to net energy for maintenance (-).
+          "minimum_fat_tissue_fraction_for_gestation": 0.32, // Code section 1.3.1: minimum fat tissue proportion in the carcass required before gestation is allowed (-).
+          "lipid_bone_parameter": 11.8, // Table S2 / lipid bone parameter used in the bone lipid equation.
+          "maximum_carcass_fraction": 0.62, // Table S2: maximum carcass fraction of total body weight (-).
+          "maximum_muscle_bone_ratio": 4.1, // Table S2: maximum muscle-to-bone ratio used in carcass tissue partitioning (-).
+          "minimum_core_skin_conductance_factor": 1.0, // Table S2 / RBCSf: minimum conduction factor from body core to skin (-).
+          "latent_heat_release_parameter_1": 3.08, // Table S2: latent heat release parameter 1 used in sweating / skin latent heat release.
+          "latent_heat_release_parameter_2": 1.73, // Table S2: latent heat release parameter 2 used in sweating / skin latent heat release.
+          "latent_heat_release_reference_temperature_c": 35.3, // Table S2: latent heat release reference temperature (°C).
+          "lactation_curve_parameter_c": 0.00338 // Table S2 / MILKPARC: Wood lactation curve parameter C; legacy 26-value breed blocks may omit this and use the default fill value.
+        }
+      }
+    },
+    {
+      // Numeric breed identifier referenced by scenarios.
+      "id": 2,
+      // Human-readable breed name.
+      "name": "Boran",
+      // Breed-specific parameter sets used inside the mechanistic equations.
+      "sex_libraries": {
+        // Male parameter set. The code maps these names back to the original LIBRARY order internally.
+        "male": {
+          "reflectance_coat": 0.6, // Table S2 / REFLC: coat reflectance used in the thermoregulation sub-model (-).
+          "coat_length_m": 0.012, // Table S2 / LC: coat length used by thermoregulation (m).
+          "body_area_factor": 1.12, // Table S2 / AREAFACTOR: body-area-to-weight factor used to estimate body surface area (-).
+          "core_skin_conductance_max_W_m2_K": 64.1, // Table S2 / CBSMAX: maximum conduction from body core to skin (W m-2 K-1).
+          "start_body_weight_kg": 28.0, // Initial total body weight at day 0 in the code; matches the breed-specific starting live weight (kg).
+          "gompertz_max_adult_weight_kg": 608.7, // Table S2 / MAXW: maximum adult weight used inside the Gompertz growth curve (kg TBW).
+          "birth_weight_kg": 28.0, // Table S2 / BIRTHW: birth weight in the Gompertz curve and calf initialization (kg).
+          "gompertz_integration_constant": 4.2, // Table S2 / CPAR: Gompertz constant of integration (-).
+          "gompertz_rate_constant": 1.5, // Table S2 / DPAR: Gompertz rate constant (-).
+          "gompertz_reduction_kg_tbw": 8.7, // Table S2 / EPAR: Gompertz reduction parameter (kg TBW).
+          "lactation_curve_parameter_a": 0.0, // Table S2 / MILKPARA: Wood lactation curve parameter A; for males this stays 0 because there is no milk production.
+          "lactation_curve_parameter_b": 0.15, // Table S2 / MILKPARB: Wood lactation curve parameter B.
+          "maximum_adult_weight_reference_kg": 600, // Table S2 / MAXW1: reference maximum adult weight used elsewhere in the growth and carcass equations (kg).
+          "sex_flag_0_male_1_female": 0, // Sex flag expected by the simulator: 0 for male, 1 for female.
+          "milk_available_for_calf_parameter_a": 0.551, // Code section 1.3.1: lactation-availability parameter A used for milk available to the calf.
+          "milk_available_for_calf_parameter_b": 0.15, // Code section 1.3.1: lactation-availability parameter B used for milk available to the calf.
+          "minimum_fraction_mature_tbw_for_gestation": 0.55, // Code section 1.3.1: minimum fraction of mature total body weight required before gestation is allowed (-).
+          "maintenance_correction_factor": 0.91, // Table S2 / maintenance correction factor applied to net energy for maintenance (-).
+          "minimum_fat_tissue_fraction_for_gestation": 0.32, // Code section 1.3.1: minimum fat tissue proportion in the carcass required before gestation is allowed (-).
+          "lipid_bone_parameter": 13.3, // Table S2 / lipid bone parameter used in the bone lipid equation.
+          "maximum_carcass_fraction": 0.578, // Table S2: maximum carcass fraction of total body weight (-).
+          "maximum_muscle_bone_ratio": 4.1, // Table S2: maximum muscle-to-bone ratio used in carcass tissue partitioning (-).
+          "minimum_core_skin_conductance_factor": 1.3, // Table S2 / RBCSf: minimum conduction factor from body core to skin (-).
+          "latent_heat_release_parameter_1": 4.89, // Table S2: latent heat release parameter 1 used in sweating / skin latent heat release.
+          "latent_heat_release_parameter_2": 0.8, // Table S2: latent heat release parameter 2 used in sweating / skin latent heat release.
+          "latent_heat_release_reference_temperature_c": 34.5, // Table S2: latent heat release reference temperature (°C).
+          "lactation_curve_parameter_c": 0.00338 // Table S2 / MILKPARC: Wood lactation curve parameter C; legacy 26-value breed blocks may omit this and use the default fill value.
+        },
+        // Female parameter set. The code maps these names back to the original LIBRARY order internally.
+        "female": {
+          "reflectance_coat": 0.6, // Table S2 / REFLC: coat reflectance used in the thermoregulation sub-model (-).
+          "coat_length_m": 0.012, // Table S2 / LC: coat length used by thermoregulation (m).
+          "body_area_factor": 1.12, // Table S2 / AREAFACTOR: body-area-to-weight factor used to estimate body surface area (-).
+          "core_skin_conductance_max_W_m2_K": 64.1, // Table S2 / CBSMAX: maximum conduction from body core to skin (W m-2 K-1).
+          "start_body_weight_kg": 25.0, // Initial total body weight at day 0 in the code; matches the breed-specific starting live weight (kg).
+          "gompertz_max_adult_weight_kg": 456.5, // Table S2 / MAXW: maximum adult weight used inside the Gompertz growth curve (kg TBW).
+          "birth_weight_kg": 25.0, // Table S2 / BIRTHW: birth weight in the Gompertz curve and calf initialization (kg).
+          "gompertz_integration_constant": 4.2, // Table S2 / CPAR: Gompertz constant of integration (-).
+          "gompertz_rate_constant": 1.5, // Table S2 / DPAR: Gompertz rate constant (-).
+          "gompertz_reduction_kg_tbw": 6.5, // Table S2 / EPAR: Gompertz reduction parameter (kg TBW).
+          "lactation_curve_parameter_a": 0.551, // Table S2 / MILKPARA: Wood lactation curve parameter A; for males this stays 0 because there is no milk production.
+          "lactation_curve_parameter_b": 0.15, // Table S2 / MILKPARB: Wood lactation curve parameter B.
+          "maximum_adult_weight_reference_kg": 450, // Table S2 / MAXW1: reference maximum adult weight used elsewhere in the growth and carcass equations (kg).
+          "sex_flag_0_male_1_female": 1, // Sex flag expected by the simulator: 0 for male, 1 for female.
+          "milk_available_for_calf_parameter_a": 0.551, // Code section 1.3.1: lactation-availability parameter A used for milk available to the calf.
+          "milk_available_for_calf_parameter_b": 0.15, // Code section 1.3.1: lactation-availability parameter B used for milk available to the calf.
+          "minimum_fraction_mature_tbw_for_gestation": 0.55, // Code section 1.3.1: minimum fraction of mature total body weight required before gestation is allowed (-).
+          "maintenance_correction_factor": 0.91, // Table S2 / maintenance correction factor applied to net energy for maintenance (-).
+          "minimum_fat_tissue_fraction_for_gestation": 0.32, // Code section 1.3.1: minimum fat tissue proportion in the carcass required before gestation is allowed (-).
+          "lipid_bone_parameter": 14.3, // Table S2 / lipid bone parameter used in the bone lipid equation.
+          "maximum_carcass_fraction": 0.55, // Table S2: maximum carcass fraction of total body weight (-).
+          "maximum_muscle_bone_ratio": 3.6, // Table S2: maximum muscle-to-bone ratio used in carcass tissue partitioning (-).
+          "minimum_core_skin_conductance_factor": 1.3, // Table S2 / RBCSf: minimum conduction factor from body core to skin (-).
+          "latent_heat_release_parameter_1": 4.89, // Table S2: latent heat release parameter 1 used in sweating / skin latent heat release.
+          "latent_heat_release_parameter_2": 0.8, // Table S2: latent heat release parameter 2 used in sweating / skin latent heat release.
+          "latent_heat_release_reference_temperature_c": 34.5, // Table S2: latent heat release reference temperature (°C).
+          "lactation_curve_parameter_c": 0.00338 // Table S2 / MILKPARC: Wood lactation curve parameter C; legacy 26-value breed blocks may omit this and use the default fill value.
+        }
+      }
+    },
+    {
+      // Numeric breed identifier referenced by scenarios.
+      "id": 3,
+      // Human-readable breed name.
+      "name": "Parda de Montana",
+      // Breed-specific parameter sets used inside the mechanistic equations.
+      "sex_libraries": {
+        // Male parameter set. The code maps these names back to the original LIBRARY order internally.
+        "male": {
+          "reflectance_coat": 0.56, // Table S2 / REFLC: coat reflectance used in the thermoregulation sub-model (-).
+          "coat_length_m": 0.012, // Table S2 / LC: coat length used by thermoregulation (m).
+          "body_area_factor": 1.0, // Table S2 / AREAFACTOR: body-area-to-weight factor used to estimate body surface area (-).
+          "core_skin_conductance_max_W_m2_K": 64.1, // Table S2 / CBSMAX: maximum conduction from body core to skin (W m-2 K-1).
+          "start_body_weight_kg": 42.0, // Initial total body weight at day 0 in the code; matches the breed-specific starting live weight (kg).
+          "gompertz_max_adult_weight_kg": 1308.4, // Table S2 / MAXW: maximum adult weight used inside the Gompertz growth curve (kg TBW).
+          "birth_weight_kg": 42.0, // Table S2 / BIRTHW: birth weight in the Gompertz curve and calf initialization (kg).
+          "gompertz_integration_constant": 1.6, // Table S2 / CPAR: Gompertz constant of integration (-).
+          "gompertz_rate_constant": 1.15, // Table S2 / DPAR: Gompertz rate constant (-).
+          "gompertz_reduction_kg_tbw": 255.7, // Table S2 / EPAR: Gompertz reduction parameter (kg TBW).
+          "lactation_curve_parameter_a": 0.0, // Table S2 / MILKPARA: Wood lactation curve parameter A; for males this stays 0 because there is no milk production.
+          "lactation_curve_parameter_b": 0.15, // Table S2 / MILKPARB: Wood lactation curve parameter B.
+          "maximum_adult_weight_reference_kg": 1052.7, // Table S2 / MAXW1: reference maximum adult weight used elsewhere in the growth and carcass equations (kg).
+          "sex_flag_0_male_1_female": 0, // Sex flag expected by the simulator: 0 for male, 1 for female.
+          "milk_available_for_calf_parameter_a": 0.46, // Code section 1.3.1: lactation-availability parameter A used for milk available to the calf.
+          "milk_available_for_calf_parameter_b": 0.15, // Code section 1.3.1: lactation-availability parameter B used for milk available to the calf.
+          "minimum_fraction_mature_tbw_for_gestation": 0.55, // Code section 1.3.1: minimum fraction of mature total body weight required before gestation is allowed (-).
+          "maintenance_correction_factor": 1.0, // Table S2 / maintenance correction factor applied to net energy for maintenance (-).
+          "minimum_fat_tissue_fraction_for_gestation": 0.32, // Code section 1.3.1: minimum fat tissue proportion in the carcass required before gestation is allowed (-).
+          "lipid_bone_parameter": 11.6, // Table S2 / lipid bone parameter used in the bone lipid equation.
+          "maximum_carcass_fraction": 0.64, // Table S2: maximum carcass fraction of total body weight (-).
+          "maximum_muscle_bone_ratio": 4.8, // Table S2: maximum muscle-to-bone ratio used in carcass tissue partitioning (-).
+          "minimum_core_skin_conductance_factor": 1.0, // Table S2 / RBCSf: minimum conduction factor from body core to skin (-).
+          "latent_heat_release_parameter_1": 3.08, // Table S2: latent heat release parameter 1 used in sweating / skin latent heat release.
+          "latent_heat_release_parameter_2": 1.73, // Table S2: latent heat release parameter 2 used in sweating / skin latent heat release.
+          "latent_heat_release_reference_temperature_c": 35.3, // Table S2: latent heat release reference temperature (°C).
+          "lactation_curve_parameter_c": 0.00338 // Table S2 / MILKPARC: Wood lactation curve parameter C; legacy 26-value breed blocks may omit this and use the default fill value.
+        },
+        // Female parameter set. The code maps these names back to the original LIBRARY order internally.
+        "female": {
+          "reflectance_coat": 0.56, // Table S2 / REFLC: coat reflectance used in the thermoregulation sub-model (-).
+          "coat_length_m": 0.012, // Table S2 / LC: coat length used by thermoregulation (m).
+          "body_area_factor": 1.0, // Table S2 / AREAFACTOR: body-area-to-weight factor used to estimate body surface area (-).
+          "core_skin_conductance_max_W_m2_K": 64.1, // Table S2 / CBSMAX: maximum conduction from body core to skin (W m-2 K-1).
+          "start_body_weight_kg": 40.0, // Initial total body weight at day 0 in the code; matches the breed-specific starting live weight (kg).
+          "gompertz_max_adult_weight_kg": 769.3, // Table S2 / MAXW: maximum adult weight used inside the Gompertz growth curve (kg TBW).
+          "birth_weight_kg": 40.0, // Table S2 / BIRTHW: birth weight in the Gompertz curve and calf initialization (kg).
+          "gompertz_integration_constant": 1.6, // Table S2 / CPAR: Gompertz constant of integration (-).
+          "gompertz_rate_constant": 1.1, // Table S2 / DPAR: Gompertz rate constant (-).
+          "gompertz_reduction_kg_tbw": 147.3, // Table S2 / EPAR: Gompertz reduction parameter (kg TBW).
+          "lactation_curve_parameter_a": 0.4562, // Table S2 / MILKPARA: Wood lactation curve parameter A; for males this stays 0 because there is no milk production.
+          "lactation_curve_parameter_b": 0.15, // Table S2 / MILKPARB: Wood lactation curve parameter B.
+          "maximum_adult_weight_reference_kg": 622, // Table S2 / MAXW1: reference maximum adult weight used elsewhere in the growth and carcass equations (kg).
+          "sex_flag_0_male_1_female": 1, // Sex flag expected by the simulator: 0 for male, 1 for female.
+          "milk_available_for_calf_parameter_a": 0.4562, // Code section 1.3.1: lactation-availability parameter A used for milk available to the calf.
+          "milk_available_for_calf_parameter_b": 0.15, // Code section 1.3.1: lactation-availability parameter B used for milk available to the calf.
+          "minimum_fraction_mature_tbw_for_gestation": 0.55, // Code section 1.3.1: minimum fraction of mature total body weight required before gestation is allowed (-).
+          "maintenance_correction_factor": 1.0, // Table S2 / maintenance correction factor applied to net energy for maintenance (-).
+          "minimum_fat_tissue_fraction_for_gestation": 0.32, // Code section 1.3.1: minimum fat tissue proportion in the carcass required before gestation is allowed (-).
+          "lipid_bone_parameter": 12.9, // Table S2 / lipid bone parameter used in the bone lipid equation.
+          "maximum_carcass_fraction": 0.62, // Table S2: maximum carcass fraction of total body weight (-).
+          "maximum_muscle_bone_ratio": 4.3, // Table S2: maximum muscle-to-bone ratio used in carcass tissue partitioning (-).
+          "minimum_core_skin_conductance_factor": 1.0, // Table S2 / RBCSf: minimum conduction factor from body core to skin (-).
+          "latent_heat_release_parameter_1": 3.08, // Table S2: latent heat release parameter 1 used in sweating / skin latent heat release.
+          "latent_heat_release_parameter_2": 1.73, // Table S2: latent heat release parameter 2 used in sweating / skin latent heat release.
+          "latent_heat_release_reference_temperature_c": 35.3, // Table S2: latent heat release reference temperature (°C).
+          "lactation_curve_parameter_c": 0.00338 // Table S2 / MILKPARC: Wood lactation curve parameter C; legacy 26-value breed blocks may omit this and use the default fill value.
+        }
+      }
+    },
+    {
+      // Numeric breed identifier referenced by scenarios.
+      "id": 4,
+      // Human-readable breed name.
+      "name": "3/4 Brahman x 1/4 Shorthorn",
+      // Breed-specific parameter sets used inside the mechanistic equations.
+      "sex_libraries": {
+        // Male parameter set. The code maps these names back to the original LIBRARY order internally.
+        "male": {
+          "reflectance_coat": 0.56, // Table S2 / REFLC: coat reflectance used in the thermoregulation sub-model (-).
+          "coat_length_m": 0.012, // Table S2 / LC: coat length used by thermoregulation (m).
+          "body_area_factor": 1.09, // Table S2 / AREAFACTOR: body-area-to-weight factor used to estimate body surface area (-).
+          "core_skin_conductance_max_W_m2_K": 64.1, // Table S2 / CBSMAX: maximum conduction from body core to skin (W m-2 K-1).
+          "start_body_weight_kg": 33.0, // Initial total body weight at day 0 in the code; matches the breed-specific starting live weight (kg).
+          "gompertz_max_adult_weight_kg": 962.6, // Table S2 / MAXW: maximum adult weight used inside the Gompertz growth curve (kg TBW).
+          "birth_weight_kg": 33.0, // Table S2 / BIRTHW: birth weight in the Gompertz curve and calf initialization (kg).
+          "gompertz_integration_constant": 1.6, // Table S2 / CPAR: Gompertz constant of integration (-).
+          "gompertz_rate_constant": 1.5, // Table S2 / DPAR: Gompertz rate constant (-).
+          "gompertz_reduction_kg_tbw": 187.6, // Table S2 / EPAR: Gompertz reduction parameter (kg TBW).
+          "lactation_curve_parameter_a": 0.0, // Table S2 / MILKPARA: Wood lactation curve parameter A; for males this stays 0 because there is no milk production.
+          "lactation_curve_parameter_b": 0.068, // Table S2 / MILKPARB: Wood lactation curve parameter B.
+          "maximum_adult_weight_reference_kg": 775, // Table S2 / MAXW1: reference maximum adult weight used elsewhere in the growth and carcass equations (kg).
+          "sex_flag_0_male_1_female": 0, // Sex flag expected by the simulator: 0 for male, 1 for female.
+          "milk_available_for_calf_parameter_a": 5.68, // Code section 1.3.1: lactation-availability parameter A used for milk available to the calf.
+          "milk_available_for_calf_parameter_b": 0.068, // Code section 1.3.1: lactation-availability parameter B used for milk available to the calf.
+          "minimum_fraction_mature_tbw_for_gestation": 0.5, // Code section 1.3.1: minimum fraction of mature total body weight required before gestation is allowed (-).
+          "maintenance_correction_factor": 0.93, // Table S2 / maintenance correction factor applied to net energy for maintenance (-).
+          "minimum_fat_tissue_fraction_for_gestation": 0.32, // Code section 1.3.1: minimum fat tissue proportion in the carcass required before gestation is allowed (-).
+          "lipid_bone_parameter": 11.6, // Table S2 / lipid bone parameter used in the bone lipid equation.
+          "maximum_carcass_fraction": 0.5935, // Table S2: maximum carcass fraction of total body weight (-).
+          "maximum_muscle_bone_ratio": 4.1, // Table S2: maximum muscle-to-bone ratio used in carcass tissue partitioning (-).
+          "minimum_core_skin_conductance_factor": 1.225, // Table S2 / RBCSf: minimum conduction factor from body core to skin (-).
+          "latent_heat_release_parameter_1": 3.08, // Table S2: latent heat release parameter 1 used in sweating / skin latent heat release.
+          "latent_heat_release_parameter_2": 2.15, // Table S2: latent heat release parameter 2 used in sweating / skin latent heat release.
+          "latent_heat_release_reference_temperature_c": 35.6, // Table S2: latent heat release reference temperature (°C).
+          "lactation_curve_parameter_c": 0.00338 // Table S2 / MILKPARC: Wood lactation curve parameter C; legacy 26-value breed blocks may omit this and use the default fill value.
+        },
+        // Female parameter set. The code maps these names back to the original LIBRARY order internally.
+        "female": {
+          "reflectance_coat": 0.56, // Table S2 / REFLC: coat reflectance used in the thermoregulation sub-model (-).
+          "coat_length_m": 0.012, // Table S2 / LC: coat length used by thermoregulation (m).
+          "body_area_factor": 1.09, // Table S2 / AREAFACTOR: body-area-to-weight factor used to estimate body surface area (-).
+          "core_skin_conductance_max_W_m2_K": 64.1, // Table S2 / CBSMAX: maximum conduction from body core to skin (W m-2 K-1).
+          "start_body_weight_kg": 30.0, // Initial total body weight at day 0 in the code; matches the breed-specific starting live weight (kg).
+          "gompertz_max_adult_weight_kg": 744.2, // Table S2 / MAXW: maximum adult weight used inside the Gompertz growth curve (kg TBW).
+          "birth_weight_kg": 30.0, // Table S2 / BIRTHW: birth weight in the Gompertz curve and calf initialization (kg).
+          "gompertz_integration_constant": 1.6, // Table S2 / CPAR: Gompertz constant of integration (-).
+          "gompertz_rate_constant": 1.5, // Table S2 / DPAR: Gompertz rate constant (-).
+          "gompertz_reduction_kg_tbw": 144.2, // Table S2 / EPAR: Gompertz reduction parameter (kg TBW).
+          "lactation_curve_parameter_a": 5.68, // Table S2 / MILKPARA: Wood lactation curve parameter A; for males this stays 0 because there is no milk production.
+          "lactation_curve_parameter_b": 0.068, // Table S2 / MILKPARB: Wood lactation curve parameter B.
+          "maximum_adult_weight_reference_kg": 675, // Table S2 / MAXW1: reference maximum adult weight used elsewhere in the growth and carcass equations (kg).
+          "sex_flag_0_male_1_female": 1, // Sex flag expected by the simulator: 0 for male, 1 for female.
+          "milk_available_for_calf_parameter_a": 5.68, // Code section 1.3.1: lactation-availability parameter A used for milk available to the calf.
+          "milk_available_for_calf_parameter_b": 0.068, // Code section 1.3.1: lactation-availability parameter B used for milk available to the calf.
+          "minimum_fraction_mature_tbw_for_gestation": 0.5, // Code section 1.3.1: minimum fraction of mature total body weight required before gestation is allowed (-).
+          "maintenance_correction_factor": 0.93, // Table S2 / maintenance correction factor applied to net energy for maintenance (-).
+          "minimum_fat_tissue_fraction_for_gestation": 0.2, // Code section 1.3.1: minimum fat tissue proportion in the carcass required before gestation is allowed (-).
+          "lipid_bone_parameter": 11.6, // Table S2 / lipid bone parameter used in the bone lipid equation.
+          "maximum_carcass_fraction": 0.55, // Table S2: maximum carcass fraction of total body weight (-).
+          "maximum_muscle_bone_ratio": 3.6, // Table S2: maximum muscle-to-bone ratio used in carcass tissue partitioning (-).
+          "minimum_core_skin_conductance_factor": 1.225, // Table S2 / RBCSf: minimum conduction factor from body core to skin (-).
+          "latent_heat_release_parameter_1": 3.08, // Table S2: latent heat release parameter 1 used in sweating / skin latent heat release.
+          "latent_heat_release_parameter_2": 2.15, // Table S2: latent heat release parameter 2 used in sweating / skin latent heat release.
+          "latent_heat_release_reference_temperature_c": 35.6, // Table S2: latent heat release reference temperature (°C).
+          "lactation_curve_parameter_c": 0.00338 // Table S2 / MILKPARC: Wood lactation curve parameter C; legacy 26-value breed blocks may omit this and use the default fill value.
+        }
+      }
+    },
+    {
+      // Numeric breed identifier referenced by scenarios.
+      "id": 5,
+      // Human-readable breed name.
+      "name": "Hereford",
+      // Breed-specific parameter sets used inside the mechanistic equations.
+      "sex_libraries": {
+        // Male parameter set. The code maps these names back to the original LIBRARY order internally.
+        "male": {
+          "reflectance_coat": 0.44, // Table S2 / REFLC: coat reflectance used in the thermoregulation sub-model (-).
+          "coat_length_m": 0.012, // Table S2 / LC: coat length used by thermoregulation (m).
+          "body_area_factor": 1.0, // Table S2 / AREAFACTOR: body-area-to-weight factor used to estimate body surface area (-).
+          "core_skin_conductance_max_W_m2_K": 64.1, // Table S2 / CBSMAX: maximum conduction from body core to skin (W m-2 K-1).
+          "start_body_weight_kg": 41.0, // Initial total body weight at day 0 in the code; matches the breed-specific starting live weight (kg).
+          "gompertz_max_adult_weight_kg": 1054.6, // Table S2 / MAXW: maximum adult weight used inside the Gompertz growth curve (kg TBW).
+          "birth_weight_kg": 41.0, // Table S2 / BIRTHW: birth weight in the Gompertz curve and calf initialization (kg).
+          "gompertz_integration_constant": 1.6, // Table S2 / CPAR: Gompertz constant of integration (-).
+          "gompertz_rate_constant": 0.99, // Table S2 / DPAR: Gompertz rate constant (-).
+          "gompertz_reduction_kg_tbw": 204.6, // Table S2 / EPAR: Gompertz reduction parameter (kg TBW).
+          "lactation_curve_parameter_a": 0.0, // Table S2 / MILKPARA: Wood lactation curve parameter A; for males this stays 0 because there is no milk production.
+          "lactation_curve_parameter_b": 0.15, // Table S2 / MILKPARB: Wood lactation curve parameter B.
+          "maximum_adult_weight_reference_kg": 850, // Table S2 / MAXW1: reference maximum adult weight used elsewhere in the growth and carcass equations (kg).
+          "sex_flag_0_male_1_female": 0, // Sex flag expected by the simulator: 0 for male, 1 for female.
+          "milk_available_for_calf_parameter_a": 0.3, // Code section 1.3.1: lactation-availability parameter A used for milk available to the calf.
+          "milk_available_for_calf_parameter_b": 0.15, // Code section 1.3.1: lactation-availability parameter B used for milk available to the calf.
+          "minimum_fraction_mature_tbw_for_gestation": 0.55, // Code section 1.3.1: minimum fraction of mature total body weight required before gestation is allowed (-).
+          "maintenance_correction_factor": 1.0, // Table S2 / maintenance correction factor applied to net energy for maintenance (-).
+          "minimum_fat_tissue_fraction_for_gestation": 0.32, // Code section 1.3.1: minimum fat tissue proportion in the carcass required before gestation is allowed (-).
+          "lipid_bone_parameter": 11.6, // Table S2 / lipid bone parameter used in the bone lipid equation.
+          "maximum_carcass_fraction": 0.6, // Table S2: maximum carcass fraction of total body weight (-).
+          "maximum_muscle_bone_ratio": 4.275, // Table S2: maximum muscle-to-bone ratio used in carcass tissue partitioning (-).
+          "minimum_core_skin_conductance_factor": 1.0, // Table S2 / RBCSf: minimum conduction factor from body core to skin (-).
+          "latent_heat_release_parameter_1": 3.08, // Table S2: latent heat release parameter 1 used in sweating / skin latent heat release.
+          "latent_heat_release_parameter_2": 1.73, // Table S2: latent heat release parameter 2 used in sweating / skin latent heat release.
+          "latent_heat_release_reference_temperature_c": 35.3, // Table S2: latent heat release reference temperature (°C).
+          "lactation_curve_parameter_c": 0.00338 // Table S2 / MILKPARC: Wood lactation curve parameter C; legacy 26-value breed blocks may omit this and use the default fill value.
+        },
+        // Female parameter set. The code maps these names back to the original LIBRARY order internally.
+        "female": {
+          "reflectance_coat": 0.44, // Table S2 / REFLC: coat reflectance used in the thermoregulation sub-model (-).
+          "coat_length_m": 0.012, // Table S2 / LC: coat length used by thermoregulation (m).
+          "body_area_factor": 1.0, // Table S2 / AREAFACTOR: body-area-to-weight factor used to estimate body surface area (-).
+          "core_skin_conductance_max_W_m2_K": 64.1, // Table S2 / CBSMAX: maximum conduction from body core to skin (W m-2 K-1).
+          "start_body_weight_kg": 36.9, // Initial total body weight at day 0 in the code; matches the breed-specific starting live weight (kg).
+          "gompertz_max_adult_weight_kg": 768.95, // Table S2 / MAXW: maximum adult weight used inside the Gompertz growth curve (kg TBW).
+          "birth_weight_kg": 36.9, // Table S2 / BIRTHW: birth weight in the Gompertz curve and calf initialization (kg).
+          "gompertz_integration_constant": 1.6, // Table S2 / CPAR: Gompertz constant of integration (-).
+          "gompertz_rate_constant": 0.99, // Table S2 / DPAR: Gompertz rate constant (-).
+          "gompertz_reduction_kg_tbw": 147.8, // Table S2 / EPAR: Gompertz reduction parameter (kg TBW).
+          "lactation_curve_parameter_a": 0.4561, // Table S2 / MILKPARA: Wood lactation curve parameter A; for males this stays 0 because there is no milk production.
+          "lactation_curve_parameter_b": 0.15, // Table S2 / MILKPARB: Wood lactation curve parameter B.
+          "maximum_adult_weight_reference_kg": 621.15, // Table S2 / MAXW1: reference maximum adult weight used elsewhere in the growth and carcass equations (kg).
+          "sex_flag_0_male_1_female": 1, // Sex flag expected by the simulator: 0 for male, 1 for female.
+          "milk_available_for_calf_parameter_a": 0.3, // Code section 1.3.1: lactation-availability parameter A used for milk available to the calf.
+          "milk_available_for_calf_parameter_b": 0.15, // Code section 1.3.1: lactation-availability parameter B used for milk available to the calf.
+          "minimum_fraction_mature_tbw_for_gestation": 0.55, // Code section 1.3.1: minimum fraction of mature total body weight required before gestation is allowed (-).
+          "maintenance_correction_factor": 1.0, // Table S2 / maintenance correction factor applied to net energy for maintenance (-).
+          "minimum_fat_tissue_fraction_for_gestation": 0.2, // Code section 1.3.1: minimum fat tissue proportion in the carcass required before gestation is allowed (-).
+          "lipid_bone_parameter": 11.6, // Table S2 / lipid bone parameter used in the bone lipid equation.
+          "maximum_carcass_fraction": 0.57, // Table S2: maximum carcass fraction of total body weight (-).
+          "maximum_muscle_bone_ratio": 4.0, // Table S2: maximum muscle-to-bone ratio used in carcass tissue partitioning (-).
+          "minimum_core_skin_conductance_factor": 1.0, // Table S2 / RBCSf: minimum conduction factor from body core to skin (-).
+          "latent_heat_release_parameter_1": 3.08, // Table S2: latent heat release parameter 1 used in sweating / skin latent heat release.
+          "latent_heat_release_parameter_2": 1.73, // Table S2: latent heat release parameter 2 used in sweating / skin latent heat release.
+          "latent_heat_release_reference_temperature_c": 35.3, // Table S2: latent heat release reference temperature (°C).
+          "lactation_curve_parameter_c": 0.00338 // Table S2 / MILKPARC: Wood lactation curve parameter C; legacy 26-value breed blocks may omit this and use the default fill value.
+        }
+      }
+    }
+  ],
+  // Simulation-level controls.
+  "simulation": {
+    "case_ids": [1] // Scenario ids to execute.
+  },
+  // Executable illustration or custom scenarios.
+  "scenarios": [
+    {
+      "id": 1,
+      "name": "Pot Ch Fr",
+      "breed_id": 1,
+      "slaughter_weight": 936.1493,
+      "location": "FRANCE1",
+      "housing": [
+        0,
+        1,
+        0
+      ],
+      "feed_availability": {
+        "feed2": 20.0,
+        "feed3": 0.0
+      },
+      "diet": {
+        "feed1_name": "WHEAT",
+        "feed2_name_housed": "HAY",
+        "feed2_name_outdoors": "HAY",
+        "feed3_name_housed": "HAY",
+        "feed3_name_outdoors": "HAY",
+        "feed1_quantity": 20.0,
+        "feed2_quantity": 20.0,
+        "feed3_quantity": 0.0,
+        "feed1_fraction": 0.65,
+        "feed2_fraction": 0.35,
+        "feed3_fraction": 1.0,
+        "feed4_fraction": 1.0,
+        "scale_feed12_with_tbw_percent": false
+      }
+    },
+    {
+      "id": 2,
+      "name": "Pot Ch Au",
+      "breed_id": 1,
+      "slaughter_weight": 717.3103,
+      "location": "AUSTRALIA1",
+      "housing": [
+        1,
+        1,
+        1
+      ],
+      "feed_availability": {
+        "feed2": 20.0,
+        "feed3": 0.0
+      },
+      "diet": {
+        "feed1_name": "WHEAT",
+        "feed2_name_housed": "HAY",
+        "feed2_name_outdoors": "HAY",
+        "feed3_name_housed": "HAY",
+        "feed3_name_outdoors": "HAY",
+        "feed1_quantity": 20.0,
+        "feed2_quantity": 20.0,
+        "feed3_quantity": 0.0,
+        "feed1_fraction": 0.65,
+        "feed2_fraction": 0.35,
+        "feed3_fraction": 1.0,
+        "feed4_fraction": 1.0,
+        "scale_feed12_with_tbw_percent": false
+      }
+    },
+    {
+      "id": 3,
+      "name": "Pot BxS Fr",
+      "breed_id": 4,
+      "slaughter_weight": 579.8809,
+      "location": "FRANCE1",
+      "housing": [
+        0,
+        1,
+        0
+      ],
+      "feed_availability": {
+        "feed2": 20.0,
+        "feed3": 0.0
+      },
+      "diet": {
+        "feed1_name": "WHEAT",
+        "feed2_name_housed": "HAY",
+        "feed2_name_outdoors": "HAY",
+        "feed3_name_housed": "HAY",
+        "feed3_name_outdoors": "HAY",
+        "feed1_quantity": 20.0,
+        "feed2_quantity": 20.0,
+        "feed3_quantity": 0.0,
+        "feed1_fraction": 0.65,
+        "feed2_fraction": 0.35,
+        "feed3_fraction": 1.0,
+        "feed4_fraction": 1.0,
+        "scale_feed12_with_tbw_percent": false
+      }
+    },
+    {
+      "id": 4,
+      "name": "Pot BxS Au",
+      "breed_id": 4,
+      "slaughter_weight": 559.7907,
+      "location": "AUSTRALIA1",
+      "housing": [
+        1,
+        1,
+        1
+      ],
+      "feed_availability": {
+        "feed2": 20.0,
+        "feed3": 0.0
+      },
+      "diet": {
+        "feed1_name": "WHEAT",
+        "feed2_name_housed": "HAY",
+        "feed2_name_outdoors": "HAY",
+        "feed3_name_housed": "HAY",
+        "feed3_name_outdoors": "HAY",
+        "feed1_quantity": 20.0,
+        "feed2_quantity": 20.0,
+        "feed3_quantity": 0.0,
+        "feed1_fraction": 0.65,
+        "feed2_fraction": 0.35,
+        "feed3_fraction": 1.0,
+        "feed4_fraction": 1.0,
+        "scale_feed12_with_tbw_percent": false
+      }
+    },
+    {
+      "id": 5,
+      "name": "FQlty Ch Fr",
+      "breed_id": 1,
+      "slaughter_weight": 877.8683,
+      "location": "FRANCE1",
+      "housing": [
+        0,
+        1,
+        0
+      ],
+      "feed_availability": {
+        "feed2": 20.0,
+        "feed3": 0.0
+      },
+      "diet": {
+        "feed1_name": "BARLEY",
+        "feed2_name_housed": "HAY",
+        "feed2_name_outdoors": "PASTURE1",
+        "feed3_name_housed": "HAY",
+        "feed3_name_outdoors": "HAY",
+        "feed1_quantity": 20.0,
+        "feed2_quantity": 20.0,
+        "feed3_quantity": 0.0,
+        "feed1_fraction": 0.05,
+        "feed2_fraction": 0.95,
+        "feed3_fraction": 1.0,
+        "feed4_fraction": 1.0,
+        "scale_feed12_with_tbw_percent": false
+      }
+    },
+    {
+      "id": 6,
+      "name": "FQlty Ch Au",
+      "breed_id": 1,
+      "slaughter_weight": 460.0,
+      "location": "AUSTRALIA1",
+      "housing": [
+        1,
+        1,
+        1
+      ],
+      "feed_availability": {
+        "feed2": 20.0,
+        "feed3": 0.0
+      },
+      "diet": {
+        "feed1_name": "BARLEY",
+        "feed2_name_housed": "PASTURE1",
+        "feed2_name_outdoors": "PASTURE1",
+        "feed3_name_housed": "HAY",
+        "feed3_name_outdoors": "HAY",
+        "feed1_quantity": 20.0,
+        "feed2_quantity": 20.0,
+        "feed3_quantity": 0.0,
+        "feed1_fraction": 0.05,
+        "feed2_fraction": 0.95,
+        "feed3_fraction": 1.0,
+        "feed4_fraction": 1.0,
+        "scale_feed12_with_tbw_percent": false
+      }
+    },
+    {
+      "id": 7,
+      "name": "FQlty BxS Fr",
+      "breed_id": 4,
+      "slaughter_weight": 574.7075,
+      "location": "FRANCE1",
+      "housing": [
+        0,
+        1,
+        0
+      ],
+      "feed_availability": {
+        "feed2": 20.0,
+        "feed3": 0.0
+      },
+      "diet": {
+        "feed1_name": "BARLEY",
+        "feed2_name_housed": "HAY",
+        "feed2_name_outdoors": "PASTURE1",
+        "feed3_name_housed": "HAY",
+        "feed3_name_outdoors": "HAY",
+        "feed1_quantity": 20.0,
+        "feed2_quantity": 20.0,
+        "feed3_quantity": 0.0,
+        "feed1_fraction": 0.05,
+        "feed2_fraction": 0.95,
+        "feed3_fraction": 1.0,
+        "feed4_fraction": 1.0,
+        "scale_feed12_with_tbw_percent": false
+      }
+    },
+    {
+      "id": 8,
+      "name": "FQlty BxS Au",
+      "breed_id": 4,
+      "slaughter_weight": 638.0943,
+      "location": "AUSTRALIA1",
+      "housing": [
+        1,
+        1,
+        1
+      ],
+      "feed_availability": {
+        "feed2": 20.0,
+        "feed3": 0.0
+      },
+      "diet": {
+        "feed1_name": "BARLEY",
+        "feed2_name_housed": "PASTURE1",
+        "feed2_name_outdoors": "PASTURE1",
+        "feed3_name_housed": "HAY",
+        "feed3_name_outdoors": "HAY",
+        "feed1_quantity": 20.0,
+        "feed2_quantity": 20.0,
+        "feed3_quantity": 0.0,
+        "feed1_fraction": 0.05,
+        "feed2_fraction": 0.95,
+        "feed3_fraction": 1.0,
+        "feed4_fraction": 1.0,
+        "scale_feed12_with_tbw_percent": false
+      }
+    },
+    {
+      "id": 9,
+      "name": "FQlty Ch Fr 1kg barley",
+      "breed_id": 1,
+      "slaughter_weight": 717.469,
+      "location": "FRANCE1",
+      "housing": [
+        0,
+        1,
+        0
+      ],
+      "feed_availability": {
+        "feed2": 0.0,
+        "feed3": 20.0
+      },
+      "diet": {
+        "feed1_name": "BARLEY",
+        "feed2_name_housed": "HAY",
+        "feed2_name_outdoors": "PASTURE1",
+        "feed3_name_housed": "HAY",
+        "feed3_name_outdoors": "PASTURE1",
+        "feed1_quantity": 1.0,
+        "feed2_quantity": 0.0,
+        "feed3_quantity": 20.0,
+        "feed1_fraction": 0.65,
+        "feed2_fraction": 1.0,
+        "feed3_fraction": 1.0,
+        "feed4_fraction": 1.0,
+        "scale_feed12_with_tbw_percent": false
+      }
+    },
+    {
+      "id": 10,
+      "name": "FLim Ch Fr 2pct BW",
+      "breed_id": 1,
+      "slaughter_weight": 992.1554,
+      "location": "FRANCE1",
+      "housing": [
+        0,
+        1,
+        0
+      ],
+      "feed_availability": {
+        "feed2": 1.9,
+        "feed3": 0.0
+      },
+      "diet": {
+        "feed1_name": "BARLEY",
+        "feed2_name_housed": "HAY",
+        "feed2_name_outdoors": "PASTURE1",
+        "feed3_name_housed": "HAY",
+        "feed3_name_outdoors": "HAY",
+        "feed1_quantity": 0.1,
+        "feed2_quantity": 1.9,
+        "feed3_quantity": 0.0,
+        "feed1_fraction": 0.05,
+        "feed2_fraction": 0.95,
+        "feed3_fraction": 1.0,
+        "feed4_fraction": 1.0,
+        "scale_feed12_with_tbw_percent": true
+      }
+    }
+  ]
+}
