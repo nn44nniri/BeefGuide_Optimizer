@@ -7,6 +7,8 @@
 
 The design follows the Economic MPC interpretation analyzed from the attached MPC review: the upper layer uses a predictive model over a finite horizon, computes the best next-day target demands under constraints, and passes those target demands to a lower climate optimizer that closes the loop with heater, cooler, damper, and environmental sensors.
 
+Digital twin status view:
+(Digital Twin diagram)[images/Industrial_cattle_farming_diagram.drawio.png]
 ## Summary
 
 `BeefGuide_Optimizer` receives a climate request `x_1` containing a timeline of daily weather observations from the beginning of the fattening season to the present day. It runs the LiGAPS-Beef herd simulator as a white-box biological engine, extracts herd-level production indicators, evaluates recent environmental stress with lightweight Economic MPC-inspired surrogate formulas, and returns a compact guidance package `x_2` for the next 24 hours.
