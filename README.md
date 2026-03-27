@@ -138,18 +138,18 @@ $$
 
 with state-update and constraint structure such as:
 
-\[
+$$
 x(k+1)=Ax(k)+Bu(k), \qquad y_{\min} \le y(k) \le y_{\max}, \qquad u_{\min} \le u(k) \le u_{\max}
-\]
+$$
 
 **Application in this library:**  
 This generic MPC structure is adapted into a lightweight daily economic guidance score. The optimizer does not solve a full large-scale online nonlinear program. Instead, it uses the LiGAPS-Beef engine outputs plus recent climate surrogates to build an economic guidance signal for the next day.
 
 ### B. Daily economic guidance score implemented in `BeefMPC_Guide/optimizer.py`
 
-\[
+$$
 J = \lambda_F \cdot FeedPenalty - \lambda_B \cdot BeefReward + \lambda_S \cdot Stress + \lambda_U \cdot U
-\]
+$$
 
 where:
 
@@ -160,30 +160,30 @@ where:
 
 In the code:
 
-\[
+$$
 FeedPenalty = \frac{1000}{FE_{herd}}
-\]
+$$
 
 where `FE_herd` is herd feed efficiency in g beef / kg DM.
 
-\[
+$$
 BeefReward = \frac{BeefProduction_{herd}}{100}
-\]
+$$
 
 where `BeefProduction_herd` is herd beef production in kg.
 
-\[
+$$
 EconomicScore = \lambda_F FeedPenalty - \lambda_B BeefReward + \lambda_S TotalStress + \lambda_U ControlCost
-\]
+$$
 
 **Application in this library:**  
 This score ranks the current climate situation economically. Lower feed penalty and higher beef reward improve the score, while stress and control burden worsen it. The final numeric value is returned as `economic_score` in `x_2`.
 
 ### C. Mean recent temperature used in the stress surrogates
 
-\[
+$$
 T_{mean} = \text{mean}\left(\frac{MINT + MAXT}{2}\right)
-\]
+$$
 
 where `MINT` and `MAXT` are the recent daily minimum and maximum temperatures.
 
@@ -192,9 +192,9 @@ This gives a lightweight dry-bulb temperature summary over the recent window, us
 
 ### D. Heat-stress surrogate
 
-\[
+$$
 HeatStress = \max(0, T_{mean} - 22)^2 + 2\max(0, VPR - 1.8)^2 - 0.25\,WIND
-\]
+$$
 
 where:
 
@@ -207,9 +207,9 @@ This is a lightweight proxy for thermal and vapour-load discomfort under hot con
 
 ### E. Cold-stress surrogate
 
-\[
+$$
 ColdStress = \max(0, 8 - T_{mean})^2 + 0.15\,WIND + 0.02\,RAIN
-\]
+$$
 
 where:
 
@@ -222,9 +222,9 @@ This is a lightweight proxy for effective cold exposure. Lower temperatures incr
 
 ### F. Humidity-load surrogate
 
-\[
+$$
 HumidityStress = \max(0, VPR - 2.0)^2
-\]
+$$
 
 where `VPR` is the recent mean vapour pressure in kPa.
 
@@ -233,9 +233,9 @@ This term represents the ventilation and dampness burden that the lower climate 
 
 ### G. Total stress
 
-\[
+$$
 TotalStress = \max(0, HeatStress) + \max(0, ColdStress) + \max(0, HumidityStress)
-\]
+$$
 
 **Application in this library:**  
 This aggregate stress value is used in the economic score and in the next-day effect estimate.
@@ -255,23 +255,23 @@ This rule determines the returned temperature band, humidity band, air-velocity 
 
 The guidance layer uses a bounded stress-reduction factor:
 
-\[
+$$
 StressReduction = \max(0.1, \min(1.5, TotalStress/10 + 0.15))
-\]
+$$
 
 Then it computes the approximate next-day biological benefit:
 
-\[
+$$
 \Delta Beef = 0.12 \cdot StressReduction
-\]
+$$
 
-\[
+$$
 \Delta Feed = -0.22 \cdot StressReduction
-\]
+$$
 
-\[
+$$
 \Delta FE = 7.5 \cdot StressReduction
-\]
+$$
 
 where:
 
@@ -297,25 +297,25 @@ This produces the `risk_level` field in `x_2`.
 
 If the request history contains `n` rows and the legacy engine needs at least `M` rows, the adapter repeats the request history
 
-\[
+$$
 reps = \left\lceil \frac{M}{n} \right\rceil
-\]
+$$
 
 and then truncates the tiled sequence to the target length.
 
 It also resets:
 
-\[
+$$
 WTS = 1, 2, \dots, M
-\]
+$$
 
-\[
+$$
 YR_i = YR_{base} + \left\lfloor \frac{i}{365} \right\rfloor
-\]
+$$
 
-\[
+$$
 DOY_i = (i \bmod 365) + 1
-\]
+$$
 
 **Application in this library:**  
 This preserves compatibility with the legacy LiGAPS-Beef script, which expects a long weather trajectory.
